@@ -30,3 +30,7 @@ else
   str = components.join(' ')
   puts str.length > 255 ? str.slice(0..251) + '...' : str
 end
+#!/bin/sh
+
+echo "OpenJFX"
+exit 0
