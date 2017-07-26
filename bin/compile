@@ -35,7 +35,7 @@ set -eu
 #OPT_DIR=$BP_DIR/../opt/
 
 #cd $BUILD_DIR
-cd build__dir
+cd build_dir
 
 curl --retry 3 -s -o javafx.zip -L https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd64.zip
 
