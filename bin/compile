@@ -14,12 +14,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$stdout.sync = true
-$stderr.sync = true
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+#$stdout.sync = true
+#$stderr.sync = true
+#$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'java_buildpack/buildpack'
+#require 'java_buildpack/buildpack'
 
-build_dir = ARGV[0]
+#build_dir = ARGV[0]
 
-JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Compile failed with exception %s', &:compile)
+#JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Compile failed with exception %s', &:compile)
+
+#!/usr/bin/env bash
+
+# fail fast
+set -eu
+
+# parse args
+BP_DIR="$(cd "$(dirname "$0")" && pwd)"
+BUILD_DIR=$1
+OPT_DIR=$BP_DIR/../opt/
+
+cd $BUILD_DIR
+
+curl --retry 3 -s -o javafx.zip -L https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd64.zip
+
+if [ -d .jdk ]; then
+  echo -n "       Extracting OpenJFX ... "
+  unzip javafx.zip -d .jdk > /dev/null 2>&1
+else
+  echo -n "       Extracting OpenJFX to .jdk-overlay/ ... "
+  unzip javafx.zip -d .jdk-overlay > /dev/null 2>&1
+fi
+echo "done"
+
+rm javafx.zip
