@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM java:openjdk-8
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     python \
     zip \
     zlib1g-dev \
+    openjfx \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
